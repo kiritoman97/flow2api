@@ -16,6 +16,7 @@ from .services.load_balancer import LoadBalancer
 from .services.concurrency_manager import ConcurrencyManager
 from .services.generation_handler import GenerationHandler
 from .api import routes, admin
+from .i18n import get_all_translations, DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, set_language
 
 
 @asynccontextmanager
@@ -253,3 +254,39 @@ async def metrics():
     """Prometheus metrics endpoint for the main Flow2API service."""
     payload = await render_main_metrics(db, concurrency_manager=concurrency_manager)
     return Response(content=payload, media_type=CONTENT_TYPE_LATEST)
+
+
+@app.get("/api/i18n")
+async def get_translations(lang: str = "en"):
+    """
+    Get all translations for the specified language.
+    Query param: lang (en, zh-CN)
+    """
+    if lang not in SUPPORTED_LANGUAGES:
+        lang = DEFAULT_LANGUAGE
+    return {
+        "lang": lang,
+        "translations": get_all_translations(lang),
+        "supported_languages": SUPPORTED_LANGUAGES,
+        "default_language": DEFAULT_LANGUAGE
+    }
+
+
+@app.post("/api/i18n")
+async def set_language_pref(lang: str = "en"):
+    """
+    Set language preference (returns language setting info).
+    This endpoint is for API confirmation; actual cookie is set on frontend.
+    """
+    if lang not in SUPPORTED_LANGUAGES:
+        lang = DEFAULT_LANGUAGE
+    return {"lang": lang, "message": "Language preference set successfully"}
+
+
+@app.get("/api/i18n/languages")
+async def get_supported_languages():
+    """Get list of supported languages."""
+    return {
+        "languages": SUPPORTED_LANGUAGES,
+        "default": DEFAULT_LANGUAGE
+    }

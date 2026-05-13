@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flow2API 模型测试</title>
+<title data-i18n-title="test_page_title">Flow2API Model Test</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f1117; color: #e1e1e6; min-height: 100vh; }
@@ -122,9 +122,28 @@ h1 { text-align: center; margin-bottom: 8px; font-size: 24px; color: #7c8aff; }
 </style>
 </head>
 <body>
+<!-- Language Switcher -->
+<div class="fixed top-4 right-4 z-50">
+    <div id="langSwitcher" class="inline-flex items-center gap-1 text-xs transition-colors hover:bg-accent h-7 px-2.5 bg-[#1a1b26] border border-[#2a2b3a] rounded-md cursor-pointer text-[#e1e1e6]">
+        <span id="langFlag">🇺🇸</span>
+        <span id="langName">English</span>
+        <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+        </svg>
+    </div>
+    <div id="langDropdown" class="hidden absolute right-0 mt-1 w-36 rounded-md border border-[#2a2b3a] bg-[#1a1b26] shadow-lg">
+        <button onclick="setLanguage('en')" class="w-full text-left px-3 py-2 text-xs hover:bg-[#1e1f2e] flex items-center gap-2 rounded-t-md text-[#e1e1e6]">
+            <span>🇺🇸</span><span>English</span>
+        </button>
+        <button onclick="setLanguage('zh-CN')" class="w-full text-left px-3 py-2 text-xs hover:bg-[#1e1f2e] flex items-center gap-2 rounded-b-md text-[#e1e1e6]">
+            <span>🇨🇳</span><span>简体中文</span>
+        </button>
+    </div>
+</div>
+
 <div class="container">
-  <h1>🧪 Flow2API 模型测试</h1>
-  <p class="subtitle">选择模型，输入提示词，测试生成效果</p>
+  <h1>🧪 <span data-i18n="test_page_title">Flow2API Model Test</span></h1>
+  <p data-i18n="test_page_subtitle" class="subtitle">Select a model, enter prompt, test generation</p>
 
   <div class="config-bar">
     <label>API Key:</label>
@@ -596,6 +615,29 @@ function renderResult(content) {
   apiKeyInput.addEventListener("change", loadModels);
   loadModels();
 })();
+
+// Language switcher toggle
+document.getElementById('langSwitcher').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('langDropdown').classList.toggle('hidden');
+});
+
+document.addEventListener('click', function() {
+    document.getElementById('langDropdown').classList.add('hidden');
+});
+
+// Initialize i18n
+initI18n();
+
+// Override setLanguage to update UI
+const originalSetLanguage = window.setLanguage;
+window.setLanguage = async function(lang) {
+    await originalSetLanguage(lang);
+    const flag = lang === 'zh-CN' ? '🇨🇳' : '🇺🇸';
+    const name = lang === 'zh-CN' ? '简体中文' : 'English';
+    document.getElementById('langFlag').textContent = flag;
+    document.getElementById('langName').textContent = name;
+};
 </script>
 </body>
 </html>

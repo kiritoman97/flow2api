@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="h-full">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登录 - Flow2API</title>
+    <title data-i18n-title="login_title">Login - Flow2API</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes slide-up{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
         .animate-slide-up{animation:slide-up .3s ease-out}
     </style>
     <script>
-        tailwind.config={theme:{extend:{colors:{border:"hsl(0 0% 89%)",input:"hsl(0 0% 89%)",ring:"hsl(0 0% 3.9%)",background:"hsl(0 0% 100%)",foreground:"hsl(0 0% 3.9%)",primary:{DEFAULT:"hsl(0 0% 9%)",foreground:"hsl(0 0% 98%)"},secondary:{DEFAULT:"hsl(0 0% 96.1%)",foreground:"hsl(0 0% 9%)"},muted:{DEFAULT:"hsl(0 0% 96.1%)",foreground:"hsl(0 0% 45.1%)"},destructive:{DEFAULT:"hsl(0 84.2% 60.2%)",foreground:"hsl(0 0% 98%)"}}}}}
+        tailwind.config={theme:{extend:{colors:{border:"hsl(0 0% 89%)",input:"hsl(0 0% 89%)",ring:"hsl(0 0% 3.9%)",background:"hsl(0 0% 100%)",foreground:"hsl(0 0% 3.9%)",primary:{DEFAULT:"hsl(0 0% 9%)",foreground:"hsl(0 0% 98%)"},secondary:{DEFAULT:"hsl(0 0% 96.1%)",foreground:"hsl(0 0% 9%)"},muted:{DEFAULT:"hsl(0 0% 96.1%)",foreground:"hsl(0 0% 45.1%)", destructive:{DEFAULT:"hsl(84.2% 60.2%)",foreground:"hsl(0 0% 98%)"}}}}}
     </script>
 </head>
 <body class="h-full bg-background text-foreground antialiased">
@@ -18,7 +18,7 @@
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             <div class="text-center">
                 <h1 class="text-4xl font-bold">Flow2API</h1>
-                <p class="mt-2 text-sm text-muted-foreground">管理员控制台</p>
+                <p data-i18n="admin_console" class="mt-2 text-sm text-muted-foreground">Admin Console</p>
             </div>
         </div>
 
@@ -26,28 +26,131 @@
             <div class="bg-background py-8 px-4 sm:px-10 rounded-lg">
                 <form id="loginForm" class="space-y-6">
                     <div class="space-y-2">
-                        <label for="username" class="text-sm font-medium">账户</label>
-                        <input type="text" id="username" name="username" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50" placeholder="请输入账户">
+                        <label data-i18n="account" for="username" class="text-sm font-medium">Account</label>
+                        <input type="text" id="username" name="username" required
+                               data-i18n-placeholder="enter_account"
+                               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+                               placeholder="Please enter account">
                     </div>
                     <div class="space-y-2">
-                        <label for="password" class="text-sm font-medium">密码</label>
-                        <input type="password" id="password" name="password" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50" placeholder="请输入密码">
+                        <label data-i18n="password" for="password" class="text-sm font-medium">Password</label>
+                        <input type="password" id="password" name="password" required
+                               data-i18n-placeholder="enter_password"
+                               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+                               placeholder="Please enter password">
                     </div>
-                    <button type="submit" id="loginButton" class="inline-flex items-center justify-center rounded-md font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 w-full disabled:opacity-50">登录</button>
+                    <button type="submit" id="loginButton"
+                            data-i18n="login_button"
+                            class="inline-flex items-center justify-center rounded-md font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 w-full disabled:opacity-50">
+                        Login
+                    </button>
                 </form>
 
                 <div class="mt-6 text-center text-xs text-muted-foreground">
-                    <p>Flow2API © 2025</p>
+                    <p data-i18n="copyright">Flow2API © 2025</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Language Switcher -->
+    <div class="fixed top-4 right-4 z-50">
+        <div id="langSwitcher" class="inline-flex items-center gap-1 text-xs transition-colors hover:bg-accent hover:text-accent-foreground h-7 px-2.5 bg-background border border-border rounded-md cursor-pointer">
+            <span id="langFlag">🇺🇸</span>
+            <span id="langName">English</span>
+            <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+            </svg>
+        </div>
+        <div id="langDropdown" class="hidden absolute right-0 mt-1 w-36 rounded-md border border-border bg-background shadow-lg">
+            <button onclick="setLanguage('en')" class="w-full text-left px-3 py-2 text-xs hover:bg-accent flex items-center gap-2 rounded-t-md">
+                <span>🇺🇸</span><span>English</span>
+            </button>
+            <button onclick="setLanguage('zh-CN')" class="w-full text-left px-3 py-2 text-xs hover:bg-accent flex items-center gap-2 rounded-b-md">
+                <span>🇨🇳</span><span>简体中文</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="/i18n.js"></script>
     <script>
-        const form=document.getElementById('loginForm'),btn=document.getElementById('loginButton');
-        form.addEventListener('submit',async(e)=>{e.preventDefault();btn.disabled=true;btn.textContent='登录中...';try{const fd=new FormData(form),r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:fd.get('username'),password:fd.get('password')})});const d=await r.json();d.success?(localStorage.setItem('adminToken',d.token),location.href='/manage'):showToast(d.message||'登录失败','error')}catch(e){showToast('网络错误,请稍后重试','error')}finally{btn.disabled=false;btn.textContent='登录'}});
-        function showToast(m,t='error'){const d=document.createElement('div'),bc={success:'bg-green-600',error:'bg-destructive',info:'bg-primary'};d.className=`fixed bottom-4 right-4 ${bc[t]||bc.error} text-white px-4 py-2.5 rounded-lg shadow-lg text-sm font-medium z-50 animate-slide-up`;d.textContent=m;document.body.appendChild(d);setTimeout(()=>{d.style.opacity='0';d.style.transition='opacity .3s';setTimeout(()=>d.parentNode&&document.body.removeChild(d),300)},2000)}
-        window.addEventListener('DOMContentLoaded',()=>{const t=localStorage.getItem('adminToken');t&&fetch('/api/stats',{headers:{Authorization:`Bearer ${t}`}}).then(r=>{if(r.ok)location.href='/manage'})});
+        // Login form submission handler
+        const form = document.getElementById('loginForm');
+        const btn = document.getElementById('loginButton');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.textContent = t('logging_in');
+            try {
+                const fd = new FormData(form);
+                const r = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({username: fd.get('username'), password: fd.get('password')})
+                });
+                const d = await r.json();
+                if (d.success) {
+                    localStorage.setItem('adminToken', d.token);
+                    location.href = '/manage';
+                } else {
+                    showToast(d.message || t('login_failed'), 'error');
+                }
+            } catch (e) {
+                showToast(t('network_error'), 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = t('login_button');
+            }
+        });
+
+        // Toast notification function
+        function showToast(m, t = 'error') {
+            const d = document.createElement('div');
+            const bc = {success: 'bg-green-600', error: 'bg-destructive', info: 'bg-primary'};
+            d.className = `fixed bottom-4 right-4 ${bc[t] || bc.error} text-white px-4 py-2.5 rounded-lg shadow-lg text-sm font-medium z-50 animate-slide-up`;
+            d.textContent = m;
+            document.body.appendChild(d);
+            setTimeout(() => {
+                d.style.opacity = '0';
+                d.style.transition = 'opacity .3s';
+                setTimeout(() => d.parentNode && document.body.removeChild(d), 300);
+            }, 2000);
+        }
+
+        // Check if already logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            const t = localStorage.getItem('adminToken');
+            if (t) {
+                fetch('/api/stats', {headers: {Authorization: `Bearer ${t}`}})
+                    .then(r => { if (r.ok) location.href = '/manage'; });
+            }
+            // Initialize i18n
+            initI18n();
+        });
+
+        // Language switcher toggle
+        document.getElementById('langSwitcher').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('langDropdown').classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function() {
+            document.getElementById('langDropdown').classList.add('hidden');
+        });
+
+        // Override setLanguage to update UI
+        const originalSetLanguage = window.setLanguage;
+        window.setLanguage = async function(lang) {
+            await originalSetLanguage(lang);
+            // Update language switcher display
+            const flag = lang === 'zh-CN' ? '🇨🇳' : '🇺🇸';
+            const name = lang === 'zh-CN' ? '简体中文' : 'English';
+            document.getElementById('langFlag').textContent = flag;
+            document.getElementById('langName').textContent = name;
+            // Re-apply translations
+            applyTranslations();
+        };
     </script>
 </body>
 </html>
