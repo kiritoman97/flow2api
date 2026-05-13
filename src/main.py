@@ -209,8 +209,9 @@ tmp_dir = Path(__file__).parent.parent / "tmp"
 tmp_dir.mkdir(exist_ok=True)
 app.mount("/tmp", StaticFiles(directory=str(tmp_dir)), name="tmp")
 
-# HTML routes for frontend
+# Static files - serve static directory for JS/CSS files
 static_path = Path(__file__).parent.parent / "static"
+app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
 
 
 @app.get("/", response_class=HTMLResponse)

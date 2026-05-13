@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   flow2api:
     image: flow2api:local
@@ -10,7 +8,8 @@ services:
     volumes:
       - ./data:/app/data
       - ./tmp:/app/tmp
-      - ./config/setting.toml:/app/config/setting.toml
+      - ./config:/app/config
+      - ./static:/app/static
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
