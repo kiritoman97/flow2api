@@ -201,12 +201,12 @@
                         <div>
                             <label class="text-sm font-medium mb-2 block">Current API Key</label>
                             <input id="cfgCurrentAPIKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" readonly disabled>
-                            <p class="text-xs text-muted-foreground mt-1">当前使用的 API Key（只读）</p>
+                            <p class="text-xs text-muted-foreground mt-1">Current API Key (read-only)</p>
                         </div>
                         <div>
                             <label class="text-sm font-medium mb-2 block">New API Key</label>
-                            <input id="cfgNewAPIKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="输入新的 API Key">
-                            <p class="text-xs text-muted-foreground mt-1">用于客户端调用 API 的密钥</p>
+                            <input id="cfgNewAPIKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Enter new API Key">
+                            <p class="text-xs text-muted-foreground mt-1">Key used by client to call API</p>
                         </div>
                     </div>
                     <button onclick="updateAPIKey()" class="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 w-full mt-4">Update API Key</button>
@@ -225,7 +225,7 @@
                         <div>
                             <label class="text-sm font-medium mb-2 block">Request Proxy Address</label>
                             <input id="cfgProxyUrl" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="http://127.0.0.1:7890 或 socks5://127.0.0.1:1080">
-                            <p class="text-xs text-muted-foreground mt-1">支持 HTTP 和 SOCKS5 代理</p>
+                            <p class="text-xs text-muted-foreground mt-1">Supports HTTP and SOCKS5 proxy</p>
                         </div>
                         <div class="pt-3 border-t border-border">
                             <label class="inline-flex items-center gap-2 cursor-pointer">
@@ -237,7 +237,7 @@
                         <div id="mediaProxyUrlInput" class="hidden">
                             <label class="text-sm font-medium mb-2 block">媒体上传下载Proxy Address</label>
                             <input id="cfgMediaProxyUrl" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="http://127.0.0.1:7897 或 socks5://127.0.0.1:1080">
-                            <p class="text-xs text-muted-foreground mt-1">支持 HTTP 和 SOCKS5 代理</p>
+                            <p class="text-xs text-muted-foreground mt-1">Supports HTTP and SOCKS5 proxy</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-2 mt-4">
@@ -279,7 +279,7 @@
                                 <option value="default">随机轮询</option>
                                 <option value="polling">顺序轮询</option>
                             </select>
-                            <p class="text-xs text-muted-foreground mt-1">随机轮询使用默认负载优先策略；顺序轮询会按可用Token的稳定顺序依次使用，全部轮完后再开始下一轮。</p>
+                            <p class="text-xs text-muted-foreground mt-1">Random polling uses default load priority strategy; sequential polling uses available tokens in stable order.</p>
                         </div>
                     </div>
                     <button onclick="saveCallLogicConfig()" class="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 w-full mt-4">Save Config</button>
@@ -320,7 +320,7 @@
                             <div>
                                 <label class="text-sm font-medium mb-2 block">缓存文件访问域名</label>
                                 <input id="cfgCacheBaseUrl" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="https://yourdomain.com">
-                                <p class="text-xs text-muted-foreground mt-1">留空则使用服务器地址，例如：https://yourdomain.com</p>
+                                <p class="text-xs text-muted-foreground mt-1">Leave empty to use server address, e.g.: https://yourdomain.com</p>
                             </div>
                             <div id="cacheEffectiveUrl" class="rounded-md bg-muted p-3 hidden">
                                 <p class="text-xs text-muted-foreground">
@@ -342,7 +342,7 @@
                                 <input id="cfgPluginConnectionUrl" type="text" readonly class="flex h-9 flex-1 rounded-md border border-input bg-muted px-3 py-2 text-sm" placeholder="Loading...">
                                 <button onclick="copyConnectionUrl()" class="inline-flex items-center justify-center rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 px-4">Copy</button>
                             </div>
-                            <p class="text-xs text-muted-foreground mt-1">Chrome扩展插件需要配置此接口地址</p>
+                            <p class="text-xs text-muted-foreground mt-1">Chrome extension needs this interface address configured</p>
                         </div>
                         <div>
                             <label class="text-sm font-semibold mb-2 block">Connection Token</label>
@@ -351,7 +351,7 @@
                                 <button onclick="generateRandomToken()" class="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4">随机</button>
                                 <button onclick="copyConnectionToken()" class="inline-flex items-center justify-center rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 px-4">Copy</button>
                             </div>
-                            <p class="text-xs text-muted-foreground mt-1">用于验证Chrome扩展插件的身份，留空将自动生成随机token</p>
+                            <p class="text-xs text-muted-foreground mt-1">Used to verify Chrome extension plugin identity, leave empty to auto-generate random token</p>
                         </div>
                         <div>
                             <label class="inline-flex items-center gap-2 cursor-pointer">
@@ -384,7 +384,7 @@
                                 <option value="personal">内置浏览器打码</option>
                                 <option value="remote_browser">远程有头打码</option>
                             </select>
-                            <p class="text-xs text-muted-foreground mt-1">选择验证码获取方式</p>
+                            <p class="text-xs text-muted-foreground mt-1">Select captcha method</p>
                         </div>
 
                         <!-- YesCaptcha配置选项 -->
