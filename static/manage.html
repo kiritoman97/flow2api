@@ -224,7 +224,7 @@
                         </div>
                         <div>
                             <label class="text-sm font-medium mb-2 block">Request Proxy Address</label>
-                            <input id="cfgProxyUrl" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="http://127.0.0.1:7890 或 socks5://127.0.0.1:1080">
+                            <input id="cfgProxyUrl" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="http://127.0.0.1:7890 or socks5://127.0.0.1:1080">
                             <p class="text-xs text-muted-foreground mt-1">Supports HTTP and SOCKS5 proxy</p>
                         </div>
                         <div class="pt-3 border-t border-border">
@@ -232,11 +232,11 @@
                                 <input type="checkbox" id="cfgMediaProxyEnabled" class="h-4 w-4 rounded border-input" onchange="toggleMediaProxyInput()">
                                 <span class="text-sm font-medium">Media Proxy</span>
                             </label>
-                            <p class="text-xs text-muted-foreground mt-1">Enable后，ImagesUpload andImages/VideosCacheDownloadcan use this separately forProxy</p>
+                            <p class="text-xs text-muted-foreground mt-1">When enabled, image upload and cached file download can use this proxy separately</p>
                         </div>
                         <div id="mediaProxyUrlInput" class="hidden">
                             <label class="text-sm font-medium mb-2 block">mediaUploadDownloadProxy Address</label>
-                            <input id="cfgMediaProxyUrl" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="http://127.0.0.1:7897 或 socks5://127.0.0.1:1080">
+                            <input id="cfgMediaProxyUrl" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="http://127.0.0.1:7897 or socks5://127.0.0.1:1080">
                             <p class="text-xs text-muted-foreground mt-1">Supports HTTP and SOCKS5 proxy</p>
                         </div>
                     </div>
@@ -244,7 +244,7 @@
                         <button id="btnTestProxy" onclick="testProxyConfig()" class="inline-flex items-center justify-center rounded-md border border-input bg-background hover:bg-accent h-9 px-4">Test Proxy</button>
                         <button onclick="saveProxyConfig()" class="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4">Save Config</button>
                     </div>
-                    <p id="proxyTestResult" class="text-xs text-muted-foreground mt-2">Testtarget：<code class="bg-muted px-1 py-0.5 rounded">https://labs.google/</code></p>
+                    <p id="proxyTestResult" class="text-xs text-muted-foreground mt-2">Test target: <code class="bg-muted px-1 py-0.5 rounded">https://labs.google/</code></p>
                 </div>
 
                 <!-- Generation Config -->
@@ -276,7 +276,7 @@
                         <div>
                             <label class="text-sm font-medium mb-2 block">Polling Mode</label>
                             <select id="cfgCallLogicMode" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                                <option value="default">Randompolling</option>
+                                <option value="default">Random Polling</option>
                                 <option value="polling">Sequential Polling</option>
                             </select>
                             <p class="text-xs text-muted-foreground mt-1">Random polling uses default load priority strategy; sequential polling uses available tokens in stable order.</p>
@@ -356,13 +356,13 @@
                         <div>
                             <label class="inline-flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" id="cfgAutoEnableOnUpdate" class="h-4 w-4 rounded border-input">
-                                <span class="text-sm font-medium">Updatingtoken时AutoEnable</span>
+                                <span class="text-sm font-medium">Auto-enable when updating token</span>
                             </label>
-                            <p class="text-xs text-muted-foreground mt-2">when pluginUpdatingtoken时，If该token被Disable，则AutoEnable它</p>
+                            <p class="text-xs text-muted-foreground mt-2">When plugin updates token, if token is disabled, auto-enable it</p>
                         </div>
                         <div class="rounded-md bg-blue-50 dark:bg-blue-900/20 p-3 border border-blue-200 dark:border-blue-800">
                             <p class="text-xs text-blue-800 dark:text-blue-200">
-                                ℹ️ <strong>UseDescription：</strong>installChromeAfter extension，将Connection Interface和TokenConfigto plugin，plugin会AutoextractGoogle Labs的cookie并Updatingto system
+                                ℹ️ <strong>Usage: </strong>After installing Chrome extension, configure connection interface and token in plugin, plugin will auto-extract Google Labs cookie and update to system
                             </p>
                         </div>
                     </div>
@@ -391,13 +391,13 @@
                         <div id="yescaptchaOptions" class="space-y-4">
                             <div>
                                 <label class="text-sm font-medium mb-2 block">YesCaptcha API Key</label>
-                                <input id="cfgYescaptchaApiKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="EnterYesCaptcha API Key">
-                                <p class="text-xs text-muted-foreground mt-1">used forAutogetreCAPTCHAVerify码，Leave empty to not use captcha</p>
+                                <input id="cfgYescaptchaApiKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Enter YesCaptcha API Key">
+                                <p class="text-xs text-muted-foreground mt-1">Used for automatic reCAPTCHA captcha acquisition, leave empty to not use captcha</p>
                             </div>
                             <div>
                                 <label class="text-sm font-medium mb-2 block">YesCaptcha API Address</label>
                                 <input id="cfgYescaptchaBaseUrl" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="https://api.yescaptcha.com">
-                                <p class="text-xs text-muted-foreground mt-1">YesCaptchaserviceAddress，Default：https://api.yescaptcha.com</p>
+                                <p class="text-xs text-muted-foreground mt-1">YesCaptcha service address, Default: https://api.yescaptcha.com</p>
                             </div>
                             <div>
                                 <label class="text-sm font-medium mb-2 block">YesCaptcha Type</label>
@@ -407,49 +407,49 @@
                                     <option value="RecaptchaV3TaskProxylessM1S7">RecaptchaV3TaskProxylessM1S7 - 30 POINTS (minScore 0.7)</option>
                                     <option value="RecaptchaV3TaskProxylessM1S9">RecaptchaV3TaskProxylessM1S9 - 35 POINTS (minScore 0.9)</option>
                                 </select>
-                                <p class="text-xs text-muted-foreground mt-1">S7/S9 Will follow createTask Force submit minScore 0.7/0.9。</p>
+                                <p class="text-xs text-muted-foreground mt-1">S7/S9 will force submit minScore 0.7/0.9 with createTask.</p>
                             </div>
                         </div>
 
                         <!-- CapMonsterConfigoptions -->
                         <div id="capmonsterOptions" class="hidden space-y-4">
                             <div>
-                                <label class="text-sm font-medium mb-2 block">CapMonster APIkey</label>
-                                <input id="cfgCapmonsterApiKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="EnterCapMonster APIkey">
-                                <p class="text-xs text-muted-foreground mt-1">used forAutogetreCAPTCHAVerify码</p>
+                                <label class="text-sm font-medium mb-2 block">CapMonster API Key</label>
+                                <input id="cfgCapmonsterApiKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="EnterCapMonster API Key">
+                                <p class="text-xs text-muted-foreground mt-1">Used for automatic reCAPTCHA captcha acquisition</p>
                             </div>
                             <div>
                                 <label class="text-sm font-medium mb-2 block">CapMonster APIAddress</label>
                                 <input id="cfgCapmonsterBaseUrl" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="https://api.capmonster.cloud">
-                                <p class="text-xs text-muted-foreground mt-1">CapMonsterserviceAddress，Default：https://api.capmonster.cloud</p>
+                                <p class="text-xs text-muted-foreground mt-1">CapMonster service address, Default: https://api.capmonster.cloud</p>
                             </div>
                         </div>
 
                         <!-- EzCaptchaConfigoptions -->
                         <div id="ezcaptchaOptions" class="hidden space-y-4">
                             <div>
-                                <label class="text-sm font-medium mb-2 block">EzCaptcha APIkey</label>
-                                <input id="cfgEzcaptchaApiKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="EnterEzCaptcha APIkey">
-                                <p class="text-xs text-muted-foreground mt-1">used forAutogetreCAPTCHAVerify码</p>
+                                <label class="text-sm font-medium mb-2 block">EzCaptcha API Key</label>
+                                <input id="cfgEzcaptchaApiKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="EnterEzCaptcha API Key">
+                                <p class="text-xs text-muted-foreground mt-1">Used for automatic reCAPTCHA captcha acquisition</p>
                             </div>
                             <div>
                                 <label class="text-sm font-medium mb-2 block">EzCaptcha APIAddress</label>
                                 <input id="cfgEzcaptchaBaseUrl" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="https://api.ez-captcha.com">
-                                <p class="text-xs text-muted-foreground mt-1">EzCaptchaserviceAddress，Default：https://api.ez-captcha.com</p>
+                                <p class="text-xs text-muted-foreground mt-1">EzCaptcha service address, Default: https://api.ez-captcha.com</p>
                             </div>
                         </div>
 
                         <!-- CapSolverConfigoptions -->
                         <div id="capsolverOptions" class="hidden space-y-4">
                             <div>
-                                <label class="text-sm font-medium mb-2 block">CapSolver APIkey</label>
-                                <input id="cfgCapsolverApiKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="EnterCapSolver APIkey">
-                                <p class="text-xs text-muted-foreground mt-1">used forAutogetreCAPTCHAVerify码</p>
+                                <label class="text-sm font-medium mb-2 block">CapSolver API Key</label>
+                                <input id="cfgCapsolverApiKey" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="EnterCapSolver API Key">
+                                <p class="text-xs text-muted-foreground mt-1">Used for automatic reCAPTCHA captcha acquisition</p>
                             </div>
                             <div>
                                 <label class="text-sm font-medium mb-2 block">CapSolver APIAddress</label>
                                 <input id="cfgCapsolverBaseUrl" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="https://api.capsolver.com">
-                                <p class="text-xs text-muted-foreground mt-1">CapSolverserviceAddress，Default：https://api.capsolver.com</p>
+                                <p class="text-xs text-muted-foreground mt-1">CapSolver service address, Default: https://api.capsolver.com</p>
                             </div>
                         </div>
 
@@ -457,23 +457,23 @@
                         <div id="browserCaptchaOptions" class="hidden space-y-4">
                             <div class="rounded-md bg-blue-50 dark:bg-blue-900/20 p-3 border border-blue-200 dark:border-blue-800">
                                 <p class="text-xs text-blue-800 dark:text-blue-200">
-                                    ℹ️ <strong>Browsercaptcha：</strong>UsePlaywrightAuto化BrowsergetVerify码，no extraConfig，But consumes more system resources
+                                    ℹ️ <strong>Browsercaptcha：</strong>Use Playwright automated browser to get captcha, no extra config needed, but consumes more system resources
                                 </p>
                             </div>
 
                             <div>
                                 <label class="inline-flex items-center gap-2 cursor-pointer">
                                     <input type="checkbox" id="cfgBrowserProxyEnabled" class="h-4 w-4 rounded border-input" onchange="toggleBrowserProxyInput()">
-                                    <span class="text-sm font-medium">EnableProxy</span>
+                                    <span class="text-sm font-medium">Enable Proxy</span>
                                 </label>
                                 <p class="text-xs text-muted-foreground mt-2">Configure independent proxy for headed browser</p>
                             </div>
 
                             <div id="browserProxyUrlInput" class="hidden">
                                 <label class="text-sm font-medium mb-2 block">Proxy Address</label>
-                                <input id="cfgBrowserProxyUrl" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="http://host:port 或 socks5://host:port">
+                                <input id="cfgBrowserProxyUrl" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="http://host:port or socks5://host:port">
                                 <p class="text-xs text-muted-foreground mt-1">
-                                    ✅ <strong>Supports：</strong>HTTP/HTTPS/SOCKS5/SOCKS5H Proxy，均Supportswith authentication<br>
+                                    ✅ <strong>Supports：</strong>HTTP/HTTPS/SOCKS5/SOCKS5H proxy, all support authentication<br>
                                     example：<code class="bg-muted px-1 py-0.5 rounded">http://user:pass@proxy.com:8080</code> 或 <code class="bg-muted px-1 py-0.5 rounded">socks5://user:pass@proxy.com:1080</code>
                                 </p>
                             </div>
@@ -481,7 +481,7 @@
                             <div>
                                 <label class="text-sm font-medium mb-2 block">Browser Count</label>
                                 <input id="cfgBrowserCount" type="number" min="1" max="20" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="1" value="1">
-                                <p class="text-xs text-muted-foreground mt-1">Number of browser instances to start simultaneously，Each browser only opens 1 tab，Requests distributed by polling</p>
+                                <p class="text-xs text-muted-foreground mt-1">Number of browser instances to start simultaneously, each browser only opens 1 tab, requests distributed by polling</p>
                             </div>
                         </div>
 
@@ -489,7 +489,7 @@
                         <div id="personalOptions" class="hidden space-y-4">
                             <div class="rounded-md bg-blue-50 dark:bg-blue-900/20 p-3 border border-blue-200 dark:border-blue-800">
                                 <p class="text-xs text-blue-800 dark:text-blue-200">
-                                    ℹ️ <strong>Browser Captcha (Built-in)：</strong>UsenodriverAuto化BrowsergetVerify码，Supportstabsreuse，Better performance
+                                    ℹ️ <strong>Browser Captcha (Built-in)：</strong>Use nodriver automated browser to get captcha, supports tab reuse, better performance
                                 </p>
                             </div>
 
@@ -540,16 +540,16 @@
                             <div class="pt-3 border-t border-border">
                                 <label class="inline-flex items-center gap-2 cursor-pointer">
                                     <input type="checkbox" id="cfgPersonalProxyEnabled" class="h-4 w-4 rounded border-input" onchange="togglePersonalProxyInput()">
-                                    <span class="text-sm font-medium">EnableProxy</span>
+                                    <span class="text-sm font-medium">Enable Proxy</span>
                                 </label>
                                 <p class="text-xs text-muted-foreground mt-2">Configure independent proxy for built-in browser（Higher priority than global request proxy）</p>
                             </div>
 
                             <div id="personalProxyUrlInput" class="hidden">
                                 <label class="text-sm font-medium mb-2 block">Proxy Address</label>
-                                <input id="cfgPersonalProxyUrl" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="http://host:port 或 socks5://host:port">
+                                <input id="cfgPersonalProxyUrl" type="text" class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="http://host:port or socks5://host:port">
                                 <p class="text-xs text-muted-foreground mt-1">
-                                    ✅ <strong>Supports：</strong>HTTP/HTTPS/SOCKS5/SOCKS5H Proxy，均Supportswith authentication<br>
+                                    ✅ <strong>Supports：</strong>HTTP/HTTPS/SOCKS5/SOCKS5H proxy, all support authentication<br>
                                     example：<code class="bg-muted px-1 py-0.5 rounded">http://user:pass@proxy.com:8080</code> 或 <code class="bg-muted px-1 py-0.5 rounded">socks5://user:pass@proxy.com:1080</code>
                                 </p>
                             </div>
