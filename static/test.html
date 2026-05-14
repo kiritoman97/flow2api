@@ -123,21 +123,13 @@ h1 { text-align: center; margin-bottom: 8px; font-size: 24px; color: #7c8aff; }
 </head>
 <body>
 <!-- Language Switcher -->
-<div class="fixed top-4 right-4 z-50">
-    <div id="langSwitcher" class="inline-flex items-center gap-1 text-xs transition-colors hover:bg-accent h-7 px-2.5 bg-[#1a1b26] border border-[#2a2b3a] rounded-md cursor-pointer text-[#e1e1e6]">
-        <span id="langFlag">🇺🇸</span>
-        <span id="langName">English</span>
-        <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"/>
-        </svg>
-    </div>
-    <div id="langDropdown" class="hidden absolute right-0 mt-1 w-36 rounded-md border border-[#2a2b3a] bg-[#1a1b26] shadow-lg">
-        <button onclick="setLanguage('en')" class="w-full text-left px-3 py-2 text-xs hover:bg-[#1e1f2e] flex items-center gap-2 rounded-t-md text-[#e1e1e6]">
-            <span>🇺🇸</span><span>English</span>
-        </button>
-        <button onclick="setLanguage('zh-CN')" class="w-full text-left px-3 py-2 text-xs hover:bg-[#1e1f2e] flex items-center gap-2 rounded-b-md text-[#e1e1e6]">
-            <span>🇨🇳</span><span>简体中文</span>
-        </button>
+<div style="position:fixed;top:10px;right:10px;z-index:9999;">
+    <button id="langSwitcher" style="background:#1a1b26;border:1px solid #2a2b3a;color:#e1e1e6;padding:4px 8px;border-radius:6px;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;">
+        <span id="langFlag">🌐</span><span id="langName">EN</span>▼
+    </button>
+    <div id="langDropdown" style="display:none;position:absolute;right:0;top:100%;margin-top:4px;background:#1a1b26;border:1px solid #2a2b3a;border-radius:6px;overflow:hidden;min-width:80px;">
+        <button onclick="setLanguage('en')" style="display:block;width:100%;padding:6px 10px;text-align:left;background:transparent;border:none;color:#e1e1e6;font-size:11px;cursor:pointer;">🌐 English</button>
+        <button onclick="setLanguage('zh-CN')" style="display:block;width:100%;padding:6px 10px;text-align:left;background:transparent;border:none;color:#e1e1e6;font-size:11px;cursor:pointer;">🇨🇳 简体中文</button>
     </div>
 </div>
 
@@ -158,11 +150,11 @@ h1 { text-align: center; margin-bottom: 8px; font-size: 24px; color: #7c8aff; }
     <div class="content">
       <div class="gen-panel">
         <h3 id="selectedModelName">Please select a model</h3>
-        <div class="model-info" id="selectedModelInfo">从左侧列表选择一个模型开始测试</div>
+        <div class="model-info" id="selectedModelInfo">Select a model from the left list to start testing</div>
 
         <div class="form-group">
           <label>Prompt</label>
-          <textarea id="promptInput" placeholder="A cute orange cat basking in sunlight on a windowsill with cherry blossoms in spring outside...">一只可爱的橘猫趴在窗台上晒太阳，窗外是樱花盛开的春天</textarea>
+          <textarea id="promptInput" placeholder="A cute orange cat basking in sunlight on a windowsill with cherry blossoms in spring outside...">A cute orange cat basking in sunlight on a windowsill with cherry blossoms in spring outside</textarea>
         </div>
 
         <div class="form-group" id="imageUploadGroup" style="display:none;">
@@ -388,7 +380,7 @@ function selectModel(modelId) {
   const meta = STATE.modelConfig;
   if (meta.supportsImages) {
     uploadGroup.style.display = "block";
-    const limitText = meta.type === "image" ? "可选，用于图生图" : `${meta.minImages}-${meta.maxImages}张`;
+    const limitText = meta.type === "image" ? "optional, for image-to-image" : `${meta.minImages}-${meta.maxImages}张`;
     document.getElementById("imageLimit").textContent = `(${limitText})`;
   } else {
     uploadGroup.style.display = "none";
@@ -496,7 +488,7 @@ async function generate() {
   const body = { model: STATE.selectedModel, messages, stream: true };
 
   const startTime = Date.now();
-  appendLog(`[${new Date().toLocaleTimeString()}] 模型: ${STATE.selectedModel}\n`);
+  appendLog(`[${new Date().toLocaleTimeString()}] Model: ${STATE.selectedModel}\n`);
   appendLog(`[${new Date().toLocaleTimeString()}] Prompt: ${prompt.substring(0, 100)}${prompt.length > 100 ? '...' : ''}\n`);
   appendLog(`[${new Date().toLocaleTimeString()}] Starting request...\n`);
 
